@@ -22,3 +22,6 @@ In this challenge, you will be judged on:
 1. Cleanliness of code
 2. Responsiveness of the design
 3. Usability and aesthetics of the design
+
+==================================================================================================================================
+
