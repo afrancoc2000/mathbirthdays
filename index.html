@@ -11,12 +11,19 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
 		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/flick/jquery-ui.css">
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/overcast/jquery-ui.css">
 		<style>
 			.main{
 				padding: 10px;
 				font-family: arial;
 				color: #444444;
+			}
+
+			.main h1{
+				margin: 20px auto;
+				text-align: center;
+				font-family: 'Open Sans', sans-serif;
 			}
 
 			.fieldcontain {
@@ -57,6 +64,7 @@
 		<div class="header"></div>
 
 		<div class="main" ng-controller="BirthdayCtrl">
+			<h1>Lets find out your math birthday!</h1>
 			<div class="fieldcontain">
 				<label>Year:</label>
 				<input type="number" min="1914" max="2014" step="1" ng-model="year" />
