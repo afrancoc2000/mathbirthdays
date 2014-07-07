@@ -11,10 +11,12 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
 		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
-		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.0/themes/flick/jquery-ui.css">
 		<style>
 			.main{
 				padding: 10px;
+				font-family: arial;
+				color: #444444;
 			}
 
 			.fieldcontain {
@@ -29,10 +31,23 @@
 
 			.fieldcontain label {
 				width: 50px;
+				display: inline-block;
 			}
 
 			.fieldcontain input {
 				width: 60px;
+				text-align: right;
+				padding: 2px 4px;
+				border-radius: 			4px;
+				-moz-border-radius: 	4px;
+				-webkit-border-radius: 	4px;
+			}
+
+			.my-slider {
+				margin-bottom: -3px;
+				margin-left: 5px;
+				display: inline-block;
+				width: 460px;
 			}
 
 		</style>
@@ -42,17 +57,35 @@
 		<div class="header"></div>
 
 		<div class="main" ng-controller="BirthdayCtrl">
-			<div id="year" class="fieldcontain">
+			<div class="fieldcontain">
 				<label>Year:</label>
-				<input type="number" id="year" min="1914" max="2014" step="1" ng-model="year" />
+				<input type="number" min="1914" max="2014" step="1" ng-model="year" />
+				<div my-resizable-slider class="my-slider">
+					<div ui-slider="" min="1914" max="2014" ng-model="year" aria-disabled="false"
+						class="ng-valid ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all ng-dirty" >
+						<a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 34%;"></a>
+					</div>
+				</div>
 			</div>
-			<div id="month" class="fieldcontain">
+			<div class="fieldcontain">
 				<label>Month:</label>
-				<input type="number" id="year" min="1" max="12" step="1" ng-model="month" />
+				<input type="number" min="1" max="12" step="1" ng-model="month" />
+				<div my-resizable-slider class="my-slider">
+					<div ui-slider="" min="1" max="12" ng-model="month" aria-disabled="false"
+						class="ng-valid ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all ng-dirty" >
+						<a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 34%;"></a>
+					</div>
+				</div>
 			</div>
-			<div id="day" class="fieldcontain">
+			<div class="fieldcontain">
 				<label>Day:</label>
-				<input type="number" id="year" min="1" max="31" step="1" ng-model="day" />
+				<input type="number" min="1" max="31" step="1" ng-model="day" />
+				<div my-resizable-slider class="my-slider">
+					<div ui-slider="" min="1" max="31" ng-model="day" aria-disabled="false"
+						class="ng-valid ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all ng-dirty" >
+						<a class="ui-slider-handle ui-state-default ui-corner-all" href="#" style="left: 34%;"></a>
+					</div>
+				</div>
 			</div>
 
 			<div class="fieldcontain">
@@ -65,11 +98,12 @@
 		<div class="footer"></div>
 
 		<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+		<script src="http://code.jquery.com/ui/1.11.0/jquery-ui.min.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script>
+		<script src="http://angular-ui.github.io/ui-slider/src/slider.js"></script>
 		<script>
 			(function(){
-				var app = angular.module('mathBirthdaysApp', []);
+				var app = angular.module('mathBirthdaysApp', ['ui.slider']);
 
 				app.controller('BirthdayCtrl', ['$scope', '$window', '$timeout', function($scope, $window, $timeout){
 					$scope.year = 1994;
@@ -90,11 +124,29 @@
 					$scope.nextMBirthdayDate = function(){
 						var daysToMathBirthday = $scope.nextMBirthdayNumber() - $scope.daysFromBirthday();
 						var today = new Date();
-
 						return new Date(today.getTime() + (daysToMathBirthday * (1000*60*60*24)));
 					};
 					
 				}]);
+
+				app.directive('myResizableSlider', ['$window', function($window){
+				    return function (scope, element, attrs) {
+			            var fieldWidth = $(".fieldcontain").width();
+			            
+			            element.css({
+			            	width: (fieldWidth - 140) + 'px'
+			            });
+			            
+			            angular.element($window).bind('resize', function(event){
+
+			                element.css({
+				            	width: ($(".fieldcontain").width() - 140) + 'px'
+			                });
+
+			            });
+				    };
+				}]);
+
 				
 			})();
 
