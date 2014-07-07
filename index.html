@@ -139,14 +139,11 @@
 
 				app.directive('myResizableSlider', ['$window', function($window){
 				    return function (scope, element, attrs) {
-			            var fieldWidth = $(".fieldcontain").width();
-			            
 			            element.css({
-			            	width: (fieldWidth - 140) + 'px'
+			            	width: ($(".fieldcontain").width() - 140) + 'px'
 			            });
 			            
 			            angular.element($window).bind('resize', function(event){
-
 			                element.css({
 				            	width: ($(".fieldcontain").width() - 140) + 'px'
 			                });
